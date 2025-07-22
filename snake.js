@@ -3,7 +3,7 @@ const ctx = canvas.getContext('2d');
 const box = 20;
 const canvasSize = 400;
 let snake = [{x: 9 * box, y: 10 * box}];
-let direction = null;
+let direction = 'RIGHT'; // 초기 방향을 RIGHT로 변경
 let food = randomFood();
 let score = 0;
 let game;
@@ -81,11 +81,11 @@ function gameOver() {
 
 function restartGame() {
     snake = [{x: 9 * box, y: 10 * box}];
-    direction = null;
+    direction = 'RIGHT'; // 초기 방향을 RIGHT로 변경
     food = randomFood();
     score = 0;
     clearInterval(game);
-    game = setInterval(gameLoop, 110);
+    game = setInterval(gameLoop, 70); // 속도를 더 빠르게
 }
 
 document.addEventListener('keydown', e => {
@@ -93,7 +93,7 @@ document.addEventListener('keydown', e => {
     else if (e.key === 'ArrowUp' && direction !== 'DOWN') direction = 'UP';
     else if (e.key === 'ArrowRight' && direction !== 'LEFT') direction = 'RIGHT';
     else if (e.key === 'ArrowDown' && direction !== 'UP') direction = 'DOWN';
-    if (!game) game = setInterval(gameLoop, 110);
+    if (!game) game = setInterval(gameLoop, 70); // 속도를 더 빠르게
 });
 
 // 모바일 터치 컨트롤
@@ -114,7 +114,7 @@ canvas.addEventListener('touchend', e => {
         if (dy > 0 && direction !== 'UP') direction = 'DOWN';
         else if (dy < 0 && direction !== 'DOWN') direction = 'UP';
     }
-    if (!game) game = setInterval(gameLoop, 110);
+    if (!game) game = setInterval(gameLoop, 70); // 속도를 더 빠르게
 });
 
 draw();
